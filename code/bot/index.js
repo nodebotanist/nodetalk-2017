@@ -15,7 +15,7 @@ const app = Consumer.create({
   queueUrl: 'https://sqs.us-west-1.amazonaws.com/007381580642/LED-Bar',
   handleMessage: (message, done) => {
     // ...
-    message = JSON.parse(JSON.parse(message.Body).body)
+    message = message.Body ? JSON.parse(JSON.parse(message.Body).body) : JSON.parse(message.body)
     console.log(message)
     if(message.repository){
       strip.setAll({
@@ -23,6 +23,24 @@ const app = Consumer.create({
         red: 0x00,
         green: 0xff,
         blue: 0x33
+      })
+
+      setTimeout(() => {
+        strip.setAll({
+          brightness: 0xff,
+          red: 0,
+          green: 0,
+          blue: 0
+        })
+      }, 2000)
+    }
+
+    if(message.event){
+      strip.setAll({
+        brightness: 0x99,
+        red: 0x66,
+        green: 0x33,
+        blue: 0x99
       })
 
       setTimeout(() => {
