@@ -30,7 +30,7 @@ DotStarStrip.prototype.init = function(clockSpeed){
 
 DotStarStrip.prototype.clear = function(cb){
   for(let i=32; i < this.pixels.length - this.endFrameLength; i+=4){
-    this.pixels[i] = 0xFF
+    this.pixels[i] = 0xff
     this.pixels[i+1] = 0x00
     this.pixels[i+2] = 0x00
     this.pixels[i+3] = 0x00
