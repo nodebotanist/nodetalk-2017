@@ -55,12 +55,12 @@ DotStarStrip.prototype.setPixel = function(options, cb){
   this.spi.transfer(this.pixels, cb)
 }
 
-DotStarStrip.prototype.test = function(cb){
+DotStarStrip.prototype.setAll = function(options, cb){
   for(let i=4; i < this.pixels.length - this.endFrameLength; i+=4){
-    this.pixels[i] = 0xe4
-    this.pixels[i+1] = 0x99
-    this.pixels[i+2] = 0x33
-    this.pixels[i+3] = 0x66
+    this.pixels[i] = options.brightness || 0xff
+    this.pixels[i+1] = options.blue
+    this.pixels[i+2] = options.green
+    this.pixels[i+3] = options.red
   }
   this.spi.transfer(this.pixels, function(err){
     if(err) throw new Error(err)
